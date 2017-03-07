@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d [%t] %-5p [%c] - %m%n</pattern>
+        </encoder>
+    </appender>
+
+
+    <!-- 演示按时间滚动的策略 -->
+    <appender name="admin" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${catalina.base}/logs/springcache.log</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/tmp/logs/springcache.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- 保留 30天数据，默认无限-->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}####%m%n</pattern>
+        </encoder>
+    </appender>
+
+    <root name="com.chenpeng.springcache" level="INFO">
+        <appender-ref ref="admin" />
+    </root>
+</configuration>
